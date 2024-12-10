@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        #passwordModal {
+            text-align: center;
+            background-color: #444;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        #passwordModal input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #passwordModal button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #passwordModal button:hover {
+            background-color: #45a049;
+        }
+
+        #portfolio {
+            display: none;
+            text-align: center;
+        }
+
+        /* Positioning and styling small buttons */
+        .nav-button {
+            position: absolute;
+            background-color: #555;
+            color: white;
+            padding: 12px 25px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 150px; /* Same width for all buttons */
+            height: 40px; /* Same height for all buttons */
+        }
+
+        .nav-button:hover {
+            background-color: #666;
+        }
+
+        #aboutMeButton {
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #communityButton {
+            bottom: 35%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        #goalsButton {
+            left: 35%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #projectsButton {
+            right: 35%;
+            top: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        /* Banner styling */
+        .banner {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Page content styles */
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Password Modal -->
+    <div id="passwordModal">
+        <h2>Enter Password to Access the Portfolio</h2>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <br>
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <!-- Portfolio Content -->
+    <div id="portfolio">
+        <h1>Portfolio</h1>
+        <!-- Navigation Buttons -->
+        <button id="aboutMeButton" class="nav-button" onclick="openPage('About Me')">About Me</button>
+        <button id="communityButton" class="nav-button" onclick="openPage('Community')">Community</button>
+        <button id="goalsButton" class="nav-button" onclick="openPage('Goals and Achievements')">Goals and Achievements</button>
+        <button id="projectsButton" class="nav-button" onclick="openPage('Projects')">Projects</button>
+    </div>
+
+    <script>
+        const correctPassword = "testingtesting"; // Define the correct password
+
+        function checkPassword() {
+            const enteredPassword = document.getElementById('passwordInput').value;
+            if (enteredPassword === correctPassword) {
+                // Hide the modal
+                document.getElementById('passwordModal').style.display = 'none';
+                // Show the portfolio content
+                document.getElementById('portfolio').style.display = 'block';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+
+        // Function to open a new page with the appropriate title and banner
+        function openPage(pageTitle) {
+            // Create a new window with the page title
+            const newWindow = window.open('', '', 'width=800,height=600');
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${pageTitle}</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            color: #333;
+                        }
+                        .banner {
+                            background-color: #4CAF50;
+                            color: white;
+                            padding: 20px;
+                            font-size: 30px;
+                            font-weight: bold;
+                            text-align: center;
+                        }
+                        .content {
+                            text-align: center;
+                            padding: 50px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="banner">${pageTitle}</div>
+                    <div class="content">
+                        <p>Welcome to the ${pageTitle} page!</p>
+                    </div>
+                </body>
+                </html>
+            `);
+        }
+    </script>
+</body>
+</html>
